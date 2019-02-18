@@ -1,24 +1,51 @@
 package com.hashedin.hu;
 
+import java.lang.reflect.Array;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
 public class LeaveManager {
     public int leaves_available = 10;
     private long no_of_days = 0;
-
+    EmployeeStore employeeStore = new EmployeeStore();
     public LeaveResponse ApplyLeave(LeaveRequest leave)
-    {
+    {   leaves_available = leave.empoyee.no_of_leaves_avilable;
         isDateValid(leave);
         LeaveResponse response= new LeaveResponse(LeaveStatus.REJECTED,"");
+        if(leave.types == LeaveTypes.MATERNITY)
+        {
+            if(checkMaternityLeaves(leave))
+            {
+                response.setStatus(LeaveStatus.APPROVED);
+                response.setComment("enjoy the maternity leave");
+                return response;
+            }
+            else{
+                response.setStatus(LeaveStatus.REJECTED);
+                return  response;
+            }
+        }
         if (checkForAvailableLeaves(leave))
         {
             response.setStatus(LeaveStatus.APPROVED);
-            leaves_available = (int) (leaves_available - no_of_days);
+            leave.empoyee.no_of_leaves_avilable = (int) (leave.empoyee.no_of_leaves_avilable - no_of_days);
         }
         return response;
+    }
+
+    private boolean checkMaternityLeaves(LeaveRequest leave) {
+        no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
+        if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE)
+        {
+            return false;
+        }
+        return true;
+
     }
 
     private boolean checkForAvailableLeaves (LeaveRequest leave)
@@ -69,6 +96,8 @@ public class LeaveManager {
         } while (startCal.getTimeInMillis() < endCal.getTimeInMillis());
         return work_days;
     }
+
+
 
 }
 

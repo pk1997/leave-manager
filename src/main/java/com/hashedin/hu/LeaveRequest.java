@@ -3,17 +3,18 @@ package com.hashedin.hu;
 import java.time.LocalDate;
 
 public class LeaveRequest {
-    int id;
+    Empoyee empoyee;
     LocalDate startDate;
     LocalDate endDate;
     boolean blanketCoverage;
+    LeaveTypes types;
 
-    public int getId() {
-        return id;
+    public Empoyee getEmployee() {
+        return empoyee;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(Empoyee empoyee) {
+        this.empoyee = empoyee;
     }
 
     public LocalDate getStartDate() {
@@ -31,11 +32,15 @@ public class LeaveRequest {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-
-    public LeaveRequest(int id, LocalDate startDate, LocalDate endDate,boolean blanketCoverage) {
-        this.id = id;
+    public void setTypes(LeaveTypes type)
+    {
+        this.types = type;
+    }
+    public LeaveRequest(Empoyee empoyee, LocalDate startDate, LocalDate endDate,boolean blanketCoverage) {
+        this.empoyee=empoyee;
         this.startDate = startDate;
         this.endDate = endDate;
         this.blanketCoverage = blanketCoverage;
+        this.types=LeaveTypes.NORMAL;
     }
 }
