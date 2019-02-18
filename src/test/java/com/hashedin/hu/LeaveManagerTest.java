@@ -73,5 +73,57 @@ public class LeaveManagerTest {
         LeaveResponse response = manager.ApplyLeave(leave);
         assertEquals(response.status,LeaveStatus.REJECTED);
     }
-
+    @Test
+    public void testPaternityLeaveFor(){
+        Empoyee e = new Empoyee("emp4",5,20,Gender.MALE);
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,1,1),LocalDate.of(2019,1,5),true);
+        leave.setTypes(LeaveTypes.PATERNITY);
+        LeaveResponse response = manager.ApplyLeave(leave);
+        assertEquals(response.status,LeaveStatus.APPROVED);
+    }
+    @Test
+    public void testPaternityLeaveForFemale(){
+        Empoyee e = new Empoyee("emp4",5,20,Gender.FEMALE);
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,1,1),LocalDate.of(2019,1,5),true);
+        leave.setTypes(LeaveTypes.PATERNITY);
+        LeaveResponse response = manager.ApplyLeave(leave);
+        assertEquals(response.status,LeaveStatus.APPROVED);
+    }
+    @Test
+    public void testValidateLeaveDuplicate() {
+        LeaveManager manager = new LeaveManager();
+        Empoyee e = new Empoyee("emp1",1,10, Gender.MALE);
+        LeaveRequest leave = new LeaveRequest(e, LocalDate.of(2019,1,1), LocalDate.of(2019,1,4),true);
+        LeaveRequest leave2 = new LeaveRequest(e, LocalDate.of(2019,1,2), LocalDate.of(2019,1,3),true);
+        LeaveResponse response = manager.ApplyLeave(leave);
+        LeaveResponse res2=manager.ApplyLeave(leave2);
+        assertEquals(LeaveStatus.REJECTED,res2.status);
+    }
+@Test
+    public void testApplyLeaveWithoutCompoff(){
+    Empoyee e = new Empoyee("emp1",1,10, Gender.MALE);
+    LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,01,1),LocalDate.of(2019,1,2),false);
+    leave.setTypes(LeaveTypes.COMP_OFF);
+    LeaveResponse response = manager.ApplyLeave(leave);
+    assertEquals(response.status,LeaveStatus.REJECTED);
+}
+@Test
+    public void testAddCompOffAndApply(){
+    Empoyee e = new Empoyee("emp1",1,10, Gender.MALE);
+    e.addCompoff(LocalDate.of(2019,1,1));
+    LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,01,1),LocalDate.of(2019,1,2),false);
+    leave.setTypes(LeaveTypes.COMP_OFF);
+    LeaveResponse response = manager.ApplyLeave(leave);
+    assertEquals(response.status,LeaveStatus.APPROVED);
+}
+@Test
+    public void testAddCompoffAndRedeemAfterMonth()
+{
+    Empoyee e = new Empoyee("emp1",1,10, Gender.MALE);
+    e.addCompoff(LocalDate.of(2019,1,1));
+    LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,4,1),LocalDate.of(2019,4,2),false);
+    leave.setTypes(LeaveTypes.COMP_OFF);
+    LeaveResponse response = manager.ApplyLeave(leave);
+    assertEquals(response.status,LeaveStatus.REJECTED);
+}
 }
