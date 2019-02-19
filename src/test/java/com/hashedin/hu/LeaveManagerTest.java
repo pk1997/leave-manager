@@ -3,6 +3,8 @@ package com.hashedin.hu;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 import static org.junit.Assert.*;
 
@@ -105,7 +107,8 @@ public class LeaveManagerTest {
 @Test
     public void testAddCompOffAndApply(){
     Empoyee e = new Empoyee("emp1",1,10, Gender.MALE,LocalDate.of(2019,1,1));
-    e.addCompoff(LocalDate.of(2019,3,1));
+    e.addCompoff(LocalDateTime.of(2019, Month.FEBRUARY,16,9,00),
+            LocalDateTime.of(2019,Month.FEBRUARY,16,20,00));
     LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,1),LocalDate.of(2019,3,2),false);
     leave.setTypes(LeaveTypes.COMP_OFF);
     LeaveResponse response = manager.ApplyLeave(leave);
@@ -115,7 +118,9 @@ public class LeaveManagerTest {
     public void testAddCompoffAndRedeemAfterMonth()
 {
     Empoyee e = new Empoyee("emp1",1,10, Gender.MALE,LocalDate.of(2019,1,1));
-    e.addCompoff(LocalDate.of(2019,1,1));
+    e.addCompoff(LocalDateTime.of(2019, Month.FEBRUARY,16,9,00),
+            LocalDateTime.of(2019,Month.FEBRUARY,16,18,00));
+
     LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,4,1),LocalDate.of(2019,4,2),false);
     leave.setTypes(LeaveTypes.COMP_OFF);
     LeaveResponse response = manager.ApplyLeave(leave);

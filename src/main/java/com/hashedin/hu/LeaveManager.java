@@ -76,7 +76,7 @@ public class LeaveManager {
             date = leave.empoyee.compOff.getWorkedOn();
             if (leave.empoyee.compOff.availableLeaves > 0) {
                 for (int i = 0; i < date.size(); i++) {
-                    if ((ChronoUnit.DAYS.between(date.get(i), leave.startDate) < 30) &&(ChronoUnit.DAYS.between(date.get(i), leave.startDate) <= leave.empoyee.compOff.availableLeaves)){
+                    if ((ChronoUnit.DAYS.between(date.get(i), leave.startDate) < 30) &&(ChronoUnit.DAYS.between(leave.startDate, leave.endDate) <= leave.empoyee.compOff.availableLeaves)){
                         date.remove(i);
                         leave.empoyee.compOff.availableLeaves -= 1;
                         return true;

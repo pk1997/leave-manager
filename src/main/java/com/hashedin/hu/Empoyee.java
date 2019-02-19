@@ -1,6 +1,7 @@
 package com.hashedin.hu;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Empoyee {
@@ -25,10 +26,9 @@ public class Empoyee {
     public String getEmployee_name() {
         return employee_name;
     }
-    public void addCompoff(LocalDate date)
+    public void addCompoff(LocalDateTime login,LocalDateTime logout)
     {
-        this.compOff.availableLeaves+=1;
-        this.compOff.setWorkedOn(date);
+        this.compOff.setWorkedOn(login,logout);
     }
 
     public void setEmployee_name(String employee_name) {

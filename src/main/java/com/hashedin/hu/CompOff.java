@@ -1,6 +1,8 @@
 package com.hashedin.hu;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class CompOff {
@@ -28,8 +30,13 @@ public class CompOff {
         return WorkedOn;
     }
 
-    public void setWorkedOn(LocalDate date) {
+    public void setWorkedOn(LocalDateTime login , LocalDateTime logout) {
 
-        WorkedOn.add(date);
+        long hours = ChronoUnit.HOURS.between(login, logout);
+        if(hours > 8)
+        {
+            this.WorkedOn.add(login.toLocalDate());
+            this.availableLeaves +=1;
+        }
     }
 }
