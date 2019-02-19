@@ -32,18 +32,10 @@ public class LeaveManagerTest {
     public void checkForWeekDays(){
         LeaveManager manager = new LeaveManager();
         Empoyee e = new Empoyee("emp2",3,20,Gender.FEMALE,LocalDate.of(2019,1,1));
-        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,4),LocalDate.of(2019,3,7),false);
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,1),LocalDate.of(2019,3,4),false);
         LeaveResponse response = manager.ApplyLeave(leave);
-        assertEquals(21,e.no_of_leaves_available);
+        assertEquals(1,e.no_of_leaves_taken);
 
-    }
-    @Test
-    public void checkForBlanketCoverage(){
-        LeaveManager manager = new LeaveManager();
-        Empoyee e = new Empoyee("emp3",4,20,Gender.FEMALE,LocalDate.of(2019,1,1));
-        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,4),LocalDate.of(2019,3,7),true);
-        LeaveResponse response = manager.ApplyLeave(leave);
-        assertEquals(21,e.no_of_leaves_available);
     }
     @Test
     public void testMaternityLeave(){
@@ -125,6 +117,11 @@ public class LeaveManagerTest {
     LeaveResponse response = manager.ApplyLeave(leave);
     assertEquals(response.status,LeaveStatus.REJECTED);
 }
-
+@Test(expected = IllegalArgumentException.class)
+    public void testInvalidDates() {
+    Empoyee e = new Empoyee("emp1", 1, 10, Gender.MALE, LocalDate.of(2019, 1, 1));
+    LeaveRequest leave = new LeaveRequest(e, LocalDate.of(2019, 3, 10), LocalDate.of(2019, 3, 1), false);
+    LeaveResponse response = manager.ApplyLeave(leave);
+    }
 
 }

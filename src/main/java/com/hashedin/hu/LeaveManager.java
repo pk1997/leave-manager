@@ -1,5 +1,6 @@
 package com.hashedin.hu;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -12,10 +13,12 @@ public class LeaveManager {
     public int leaves_available = 0;
     private long no_of_days = 0;
     EmployeeStore employeeStore = new EmployeeStore();
+
     public LeaveResponse ApplyLeave(LeaveRequest leave)
     {
         accural.addLeavesMonthly(leave.empoyee,leave.getRequestedDate());
-        leaves_available = leave.empoyee.no_of_leaves_available;
+
+        leaves_available = leave.empoyee.total_no_of_leaves-leave.empoyee.no_of_leaves_taken;
         isDateValid(leave);
         LeaveResponse response= new LeaveResponse(LeaveStatus.REJECTED,"");
         if(checkForOverlap(leave))
@@ -28,6 +31,9 @@ public class LeaveManager {
         {
             if(checkMaternityLeaves(leave))
             {
+                leave.empoyee.setMaternity_leave_from(leave.startDate);
+                leave.empoyee.setMaternity_leave_till(leave.endDate);
+                leave.empoyee.no_of_maternity_leaves_taken+=1;
                 response.setStatus(LeaveStatus.APPROVED);
                 response.setComment("enjoy the maternity leave");
                 leave.empoyee.addLeave(leave.startDate,leave.endDate);
@@ -64,13 +70,16 @@ public class LeaveManager {
         {
             response.setStatus(LeaveStatus.APPROVED);
             leave.empoyee.addLeave(leave.startDate,leave.endDate);
-            leave.empoyee.no_of_leaves_available = (int) (leave.empoyee.no_of_leaves_available - no_of_days);
+            leave.empoyee.no_of_leaves_taken+=1;
         }
         return response;
     }
 
+
     private boolean handleCompOff(LeaveRequest leave) {
-        no_of_days = getWorkingDaysBetweenTwoDays(leave);
+        ArrayList <LocalDate> publicHolidays = new ArrayList<>();
+        publicHolidays.add(LocalDate.of(2019,1,25));
+        no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate,publicHolidays);
         if(leave.empoyee.compOff.availableLeaves>0){
         ArrayList<LocalDate> date;
             date = leave.empoyee.compOff.getWorkedOn();
@@ -131,7 +140,7 @@ public class LeaveManager {
 
     private boolean checkMaternityLeaves(LeaveRequest leave) {
         no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
-        if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE)
+        if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE || leave.empoyee.no_of_maternity_leaves_taken > 2)
         {
             return false;
         }
@@ -141,9 +150,10 @@ public class LeaveManager {
 
     private boolean checkForAvailableLeaves (LeaveRequest leave)
         {
-
+             ArrayList <LocalDate> publicHolidays = new ArrayList<>();
+            publicHolidays.add(LocalDate.of(2019,1,25));
             if(!leave.blanketCoverage) {
-                no_of_days = getWorkingDaysBetweenTwoDays(leave);
+                no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate,publicHolidays);
             }
             else
             {
@@ -163,29 +173,16 @@ public class LeaveManager {
         }
 
     }
-    private int getWorkingDaysBetweenTwoDays(LeaveRequest leave) {
-        Calendar startCal = Calendar.getInstance();
-        Calendar endCal = Calendar.getInstance();
-        Date startDate = Date.from(leave.startDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        Date endDate = Date.from(leave.endDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-        startCal.setTime(startDate);
-        endCal.setTime(endDate);
-        int work_days = 0;
-        if (startCal.getTimeInMillis() == endCal.getTimeInMillis()) {
-            return 0;
-        }
-        if (startCal.getTimeInMillis() > endCal.getTimeInMillis()) {
-            startCal.setTime(endDate);
-            endCal.setTime(startDate);
-        }
-        do {
-            //excluding start date
-            startCal.add(Calendar.DAY_OF_MONTH, 1);
-            if (startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && startCal.get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY) {
-                ++work_days;
+    private int getWorkingDaysBetweenTwoDays(LocalDate from,LocalDate to, ArrayList<LocalDate> publicHolidays) {
+        int workingDays=0;
+        for (LocalDate date = from; date.isBefore(to); date = date.plusDays(1)) {
+            if (!(date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY
+                    || publicHolidays.contains(date)))
+            {
+                workingDays++;
             }
-        } while (startCal.getTimeInMillis() < endCal.getTimeInMillis());
-        return work_days;
+        }
+        return workingDays;
     }
 
 

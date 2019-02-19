@@ -8,20 +8,40 @@ public class Empoyee {
     public Empoyee(String employee_name, int employee_id, int no_of_leaves_avilable,Gender gender,LocalDate date) {
         this.employee_name = employee_name;
         this.employee_id = employee_id;
-        this.no_of_leaves_available = no_of_leaves_avilable;
+        this.total_no_of_leaves = no_of_leaves_avilable;
         this.gender = gender;
         this.JoiningDate = date;
     }
 
     String employee_name;
     int employee_id;
-    int no_of_leaves_available;
+    int no_of_leaves_taken = 0;
+    int total_no_of_leaves;
     Gender gender;
     ArrayList<LocalDate> fromDate = new ArrayList<LocalDate>();
     ArrayList<LocalDate> toDate = new ArrayList<LocalDate>();
     CompOff compOff = new CompOff();
     LocalDate JoiningDate;
+    int no_of_maternity_leaves_taken;
+    LocalDate maternity_leave_from;
+    LocalDate Maternity_leave_till;
 
+
+    public LocalDate getMaternity_leave_from() {
+        return maternity_leave_from;
+    }
+
+    public void setMaternity_leave_from(LocalDate maternity_leave_from) {
+        this.maternity_leave_from = maternity_leave_from;
+    }
+
+    public LocalDate getMaternity_leave_till() {
+        return Maternity_leave_till;
+    }
+
+    public void setMaternity_leave_till(LocalDate maternity_leave_till) {
+        Maternity_leave_till = maternity_leave_till;
+    }
 
     public String getEmployee_name() {
         return employee_name;
@@ -43,12 +63,12 @@ public class Empoyee {
         this.employee_id = employee_id;
     }
 
-    public int getNo_of_leaves_available() {
-        return no_of_leaves_available;
+    public int getTotal_no_of_leaves() {
+        return total_no_of_leaves;
     }
 
-    public void setNo_of_leaves_available(int no_of_leaves_available) {
-        this.no_of_leaves_available = no_of_leaves_available;
+    public void setTotal_no_of_leaves(int total_no_of_leaves) {
+        this.total_no_of_leaves = total_no_of_leaves;
     }
     public void addLeave(LocalDate from,LocalDate to)
     {
