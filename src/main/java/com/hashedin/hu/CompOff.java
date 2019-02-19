@@ -1,5 +1,6 @@
 package com.hashedin.hu;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -33,7 +34,7 @@ public class CompOff {
     public void setWorkedOn(LocalDateTime login , LocalDateTime logout) {
 
         long hours = ChronoUnit.HOURS.between(login, logout);
-        if(hours > 8)
+        if(hours > 8 && (login.getDayOfWeek() == DayOfWeek.SATURDAY || login.getDayOfWeek() == DayOfWeek.SUNDAY))
         {
             this.WorkedOn.add(login.toLocalDate());
             this.availableLeaves +=1;
