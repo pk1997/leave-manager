@@ -1,9 +1,11 @@
 package com.hashedin.hu;
+//create leave applications using this class
 
 import java.time.LocalDate;
 
 public class LeaveRequest {
     Empoyee empoyee;
+    //store the date on which leave was requested default is todays date
     LocalDate requestedDate;
 
     {
@@ -55,6 +57,7 @@ public class LeaveRequest {
         this.endDate = endDate;
         this.blanketCoverage = blanketCoverage;
         this.types=LeaveTypes.NORMAL;
+        //if requested date is before the date leave has been applied then throw an exception
         if(this.requestedDate.isAfter(this.startDate))
         {
             throw new IllegalArgumentException("Startdate before requested Date");

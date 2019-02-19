@@ -1,3 +1,4 @@
+//Employee class to store data of employee details
 package com.hashedin.hu;
 
 import java.time.LocalDate;
@@ -12,16 +13,16 @@ public class Empoyee {
         this.gender = gender;
         this.JoiningDate = date;
     }
-
+//properties of employee
     String employee_name;
     int employee_id;
     int no_of_leaves_taken = 0;
     int total_no_of_leaves;
     Gender gender;
-    ArrayList<LocalDate> fromDate = new ArrayList<LocalDate>();
-    ArrayList<LocalDate> toDate = new ArrayList<LocalDate>();
-    CompOff compOff = new CompOff();
-    LocalDate JoiningDate;
+    ArrayList<LocalDate> fromDate = new ArrayList<LocalDate>();//if leave is taken store starting date here
+    ArrayList<LocalDate> toDate = new ArrayList<LocalDate>();//if leave is taken store leave end date here
+    CompOff compOff = new CompOff();//Add any compoff here
+    LocalDate JoiningDate; //Joining date of employee for leave calculation
     int no_of_maternity_leaves_taken;
     LocalDate maternity_leave_from;
     LocalDate Maternity_leave_till;
@@ -70,6 +71,7 @@ public class Empoyee {
     public void setTotal_no_of_leaves(int total_no_of_leaves) {
         this.total_no_of_leaves = total_no_of_leaves;
     }
+    //if leave is approved the store the dates that leave is approved between
     public void addLeave(LocalDate from,LocalDate to)
     {
         this.fromDate.add(from);
