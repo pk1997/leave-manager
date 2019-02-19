@@ -9,7 +9,6 @@ public class LeaveRequest {
     {
         requestedDate = LocalDate.now();
     }
-
     public LocalDate getRequestedDate() {
         return requestedDate;
     }
@@ -56,5 +55,10 @@ public class LeaveRequest {
         this.endDate = endDate;
         this.blanketCoverage = blanketCoverage;
         this.types=LeaveTypes.NORMAL;
+        if(this.requestedDate.isAfter(this.startDate))
+        {
+            throw new IllegalArgumentException("Startdate before requested Date");
+        }
     }
+
 }
