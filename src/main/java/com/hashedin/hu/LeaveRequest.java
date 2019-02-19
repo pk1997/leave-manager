@@ -4,6 +4,20 @@ import java.time.LocalDate;
 
 public class LeaveRequest {
     Empoyee empoyee;
+    LocalDate requestedDate;
+
+    {
+        requestedDate = LocalDate.now();
+    }
+
+    public LocalDate getRequestedDate() {
+        return requestedDate;
+    }
+
+    public void setRequestedDate(LocalDate requestedDate) {
+        this.requestedDate = requestedDate;
+    }
+
     LocalDate startDate;
     LocalDate endDate;
     boolean blanketCoverage;

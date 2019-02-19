@@ -2,23 +2,25 @@ package com.hashedin.hu;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Empoyee {
-    public Empoyee(String employee_name, int employee_id, int no_of_leaves_avilable,Gender gender) {
+    public Empoyee(String employee_name, int employee_id, int no_of_leaves_avilable,Gender gender,LocalDate date) {
         this.employee_name = employee_name;
         this.employee_id = employee_id;
-        this.no_of_leaves_avilable = no_of_leaves_avilable;
+        this.no_of_leaves_available = no_of_leaves_avilable;
         this.gender = gender;
+        this.JoiningDate = date;
     }
 
     String employee_name;
     int employee_id;
-    int no_of_leaves_avilable;
+    int no_of_leaves_available;
     Gender gender;
     ArrayList<LocalDate> fromDate = new ArrayList<LocalDate>();
     ArrayList<LocalDate> toDate = new ArrayList<LocalDate>();
     CompOff compOff = new CompOff();
+    LocalDate JoiningDate;
+
 
     public String getEmployee_name() {
         return employee_name;
@@ -42,11 +44,11 @@ public class Empoyee {
     }
 
     public int getNo_of_leaves_available() {
-        return no_of_leaves_avilable;
+        return no_of_leaves_available;
     }
 
-    public void setNo_of_leaves_avilable(int no_of_leaves_available) {
-        this.no_of_leaves_avilable = no_of_leaves_available;
+    public void setNo_of_leaves_available(int no_of_leaves_available) {
+        this.no_of_leaves_available = no_of_leaves_available;
     }
     public void addLeave(LocalDate from,LocalDate to)
     {
@@ -63,4 +65,7 @@ public class Empoyee {
         return toDate;
     }
 
+    public void JoiningDate(LocalDate of) {
+        this.JoiningDate = of;
+    }
 }

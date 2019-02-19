@@ -8,11 +8,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class LeaveManager {
-    public int leaves_available = 10;
+    LeaveAccrual accural = new LeaveAccrual();
+    public int leaves_available = 0;
     private long no_of_days = 0;
     EmployeeStore employeeStore = new EmployeeStore();
     public LeaveResponse ApplyLeave(LeaveRequest leave)
-    {   leaves_available = leave.empoyee.no_of_leaves_avilable;
+    {
+        accural.addLeavesMonthly(leave.empoyee,leave.getRequestedDate());
+        leaves_available = leave.empoyee.no_of_leaves_available;
         isDateValid(leave);
         LeaveResponse response= new LeaveResponse(LeaveStatus.REJECTED,"");
         if(checkForOverlap(leave))
@@ -51,6 +54,7 @@ public class LeaveManager {
             if(handleCompOff(leave))
             {
                 response.setStatus(LeaveStatus.APPROVED);
+                leave.empoyee.addLeave(leave.startDate,leave.endDate);
                 return response;
             }
             response.setStatus(LeaveStatus.REJECTED);
@@ -60,7 +64,7 @@ public class LeaveManager {
         {
             response.setStatus(LeaveStatus.APPROVED);
             leave.empoyee.addLeave(leave.startDate,leave.endDate);
-            leave.empoyee.no_of_leaves_avilable = (int) (leave.empoyee.no_of_leaves_avilable - no_of_days);
+            leave.empoyee.no_of_leaves_available = (int) (leave.empoyee.no_of_leaves_available - no_of_days);
         }
         return response;
     }
@@ -145,7 +149,7 @@ public class LeaveManager {
             {
                 no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
             }
-            if(no_of_days > leaves_available)
+            if(no_of_days >= leaves_available)
             {
                 return false;
             }
