@@ -13,7 +13,7 @@ public class LeaveAccrualTest {
     @Test
     public void testAddOnlyOneLeaveIfEmployeeJoinedAfter15(){
         accrual.addLeavesMonthly(e1,LocalDate.of(2019,2,1));
-        assertEquals(3,e1.total_no_of_leaves);
+        assertEquals(1,e1.total_no_of_leaves);
     }
     @Test
     public void testMaternityLeaveUpdating()
@@ -22,7 +22,7 @@ public class LeaveAccrualTest {
         request.types = LeaveTypes.MATERNITY;
         LeaveResponse response = manager.ApplyLeave(request);
         accrual.addLeavesMonthly(e1,LocalDate.of(2019,8,1));
-        assertEquals(e1.total_no_of_leaves,6);
+        assertEquals(e1.total_no_of_leaves,4);
     }
     @Test
     public void testMaternityLeaveUpdatingCheckAfterHoliday()
@@ -31,7 +31,7 @@ public class LeaveAccrualTest {
         request.types = LeaveTypes.MATERNITY;
         LeaveResponse response = manager.ApplyLeave(request);
         accrual.addLeavesMonthly(e1,LocalDate.of(2019,10,1));
-        assertEquals(10,e1.total_no_of_leaves);
+        assertEquals(6,e1.total_no_of_leaves);
     }
 
 }

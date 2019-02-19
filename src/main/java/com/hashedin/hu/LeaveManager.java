@@ -148,7 +148,7 @@ public class LeaveManager {
     }
 
     private boolean checkForPaternityLeaves(LeaveRequest leave) {
-        no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
+        no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate, leave.endDate);
         if(leave.empoyee.gender == Gender.MALE && no_of_days <= 10){
             return true;
         }
