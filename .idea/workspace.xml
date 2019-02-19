@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="35be6982-7b0c-455f-93a8-d3c9d22a0593" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/Empoyee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/Empoyee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveAccrual.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveAccrual.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hashedin/hu/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveAccrualTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveAccrualTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveManagerTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -24,20 +19,20 @@
     <SUITE FILE_PATH="coverage/huleavemanager$CompOffTest.ic" NAME="CompOffTest Coverage Results" MODIFIED="1550561376156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.hashedin.hu.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/huleavemanager$LeaveManagerTest.ic" NAME="LeaveManagerTest Coverage Results" MODIFIED="1550579888399" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/huleavemanager$LeaveManagerTest.ic" NAME="LeaveManagerTest Coverage Results" MODIFIED="1550580644372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.hashedin.hu.*</FILTER>
     </SUITE>
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="399" />
+    <option name="myElementSize" value="406" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveManagerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1314">
-              <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+            <state relative-caret-position="-825">
+              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -88,6 +83,22 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="275">
+              <caret line="211" column="34" selection-start-line="211" selection-start-column="34" selection-end-line="211" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#handleCompOff#0;class#LeaveManager#0" />
+                <element signature="method#checkForOverlap#0;class#LeaveManager#0" />
+                <element signature="method#checkForAvailableLeaves#0;class#LeaveManager#0" />
+                <element signature="method#isDateValid#0;class#LeaveManager#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -108,6 +119,7 @@
       <find>MATE</find>
       <find>mater</find>
       <find>comp</find>
+      <find>Array</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -129,12 +141,12 @@
         <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveRequest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/CompOff.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/hashedin/hu/CompOffTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveManagerTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/main.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/Empoyee.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveAccrual.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveAccrualTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveManagerTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java" />
       </list>
     </option>
   </component>
@@ -213,7 +225,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550580200551" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1550581932313" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
   </component>
@@ -339,15 +351,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="LeaveAccrualTest_testMaternityLeaveUpdation - 2019.02.19 at 17h 39m 06s.xml">
-      <configuration name="LeaveAccrualTest.testMaternityLeaveUpdation" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveManagerTest - 2019.02.19 at 18h 08m 09s.xml">
-      <configuration name="LeaveManagerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="LeaveAccrualTest - 2019.02.19 at 18h 09m 48s.xml">
-      <configuration name="LeaveAccrualTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="LeaveAccrualTest - 2019.02.19 at 18h 09m 49s.xml">
       <configuration name="LeaveAccrualTest" configurationId="JUnit" />
     </history-entry>
@@ -369,12 +372,21 @@
     <history-entry file="LeaveManagerTest - 2019.02.19 at 18h 13m 13s.xml">
       <configuration name="LeaveManagerTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="LeaveManagerTest - 2019.02.19 at 18h 20m 45s.xml">
+      <configuration name="LeaveManagerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LeaveManagerTest - 2019.02.19 at 18h 24m 43s.xml">
+      <configuration name="LeaveManagerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="LeaveManagerTest - 2019.02.19 at 18h 24m 45s.xml">
+      <configuration name="LeaveManagerTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25379092" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25379092" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -563,22 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="144" column="25" lean-forward="true" selection-start-line="144" selection-start-column="25" selection-end-line="144" selection-end-column="25" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#checkForOverlap#0;class#LeaveManager#0" />
-            <element signature="method#validateOverlap#0;class#LeaveManager#0" />
-            <element signature="method#checkForPaternityLeaves#0;class#LeaveManager#0" />
-            <element signature="method#checkForAvailableLeaves#0;class#LeaveManager#0" />
-            <element signature="method#isDateValid#0;class#LeaveManager#0" />
-            <element signature="method#getWorkingDaysBetweenTwoDays#0;class#LeaveManager#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveAccrual.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="690">
@@ -618,10 +614,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/hashedin/hu/LeaveManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1314">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
+        <state relative-caret-position="-825">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/hashedin/hu/LeaveManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="211" column="34" selection-start-line="211" selection-start-column="34" selection-end-line="211" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#handleCompOff#0;class#LeaveManager#0" />
+            <element signature="method#checkForOverlap#0;class#LeaveManager#0" />
+            <element signature="method#checkForAvailableLeaves#0;class#LeaveManager#0" />
+            <element signature="method#isDateValid#0;class#LeaveManager#0" />
           </folding>
         </state>
       </provider>
