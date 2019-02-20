@@ -15,12 +15,21 @@ public class LeaveAccrual {
     }
 
     public void addLeavesMonthly(Empoyee e , LocalDate date)
-    {
-        monthsBetween = ChronoUnit.MONTHS.between(e.JoiningDate.withDayOfMonth(1),
+    {   LocalDate holidayCalculatedFrom;
+        if(e.getJoiningDate().isAfter(e.leavesLastResetOn))
+        {
+            holidayCalculatedFrom = e.joiningDate;
+        }
+        else
+        {
+            holidayCalculatedFrom = e.leavesLastResetOn;
+        }
+
+        monthsBetween = ChronoUnit.MONTHS.between(holidayCalculatedFrom.withDayOfMonth(1),
                 date.withDayOfMonth(1));
         long no_holiday_months = checkIfEmployeeHasTakenMaternityLeave(e,date);
 
-        if(checkIfHeHasJoinedAfter15(e.JoiningDate))
+        if(checkIfHeHasJoinedAfter15(holidayCalculatedFrom))
         {
 
             holidaysLeft= (int) (((monthsBetween-no_holiday_months)*2)-1);

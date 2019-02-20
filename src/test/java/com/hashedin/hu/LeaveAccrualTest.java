@@ -21,26 +21,27 @@ public class LeaveAccrualTest {
     @Test
     public void testMaternityLeaveUpdating()
     {
-        LeaveRequest request = new LeaveRequest(e1,LocalDate.of(2019,7,10),null,true);
+        LeaveRequest request = new LeaveRequest(e2,LocalDate.of(2019,7,10),null,true);
         request.setMaternityLeave();
         LeaveResponse response = manager.ApplyLeave(request);
-        accrual.addLeavesMonthly(e1,LocalDate.of(2019,8,1));
-        assertEquals(e1.total_no_of_leaves,14);
+        accrual.addLeavesMonthly(e2,LocalDate.of(2019,10,1));
+        assertEquals(e2.total_no_of_leaves,14);
     }
     @Test
     public void testMaternityLeaveUpdatingCheckAfterHoliday()
     {
-        LeaveRequest request = new LeaveRequest(e1,LocalDate.of(2019,3,10),LocalDate.of(2019,9,1),true);
-        request.types = LeaveTypes.MATERNITY;
+        LeaveRequest request = new LeaveRequest(e1,LocalDate.of(2019,7,10),null,true);
+        request.setMaternityLeave();
         LeaveResponse response = manager.ApplyLeave(request);
         accrual.addLeavesMonthly(e1,LocalDate.of(2019,10,1));
-        assertEquals(6,e1.total_no_of_leaves);
+        assertEquals(18,e1.total_no_of_leaves);
     }
     @Test
-    public void testForLeaveUpdation()
+    public void testForLeaveUpdating()
     {
         accrual.addLeavesMonthly(e2,LocalDate.of(2019,2,1));
         assertEquals(2,e2.total_no_of_leaves);
     }
+    
 
 }

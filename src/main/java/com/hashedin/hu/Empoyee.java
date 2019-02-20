@@ -11,7 +11,7 @@ public class Empoyee {
         this.employee_id = employee_id;
         this.total_no_of_leaves = no_of_leaves_avilable;
         this.gender = gender;
-        this.JoiningDate = date;
+        this.joiningDate = date;
     }
 //properties of employee
     String employee_name;
@@ -22,10 +22,21 @@ public class Empoyee {
     ArrayList<LocalDate> fromDate = new ArrayList<LocalDate>();//if leave is taken store starting date here
     ArrayList<LocalDate> toDate = new ArrayList<LocalDate>();//if leave is taken store leave end date here
     CompOff compOff = new CompOff();//Add any compoff here
-    LocalDate JoiningDate; //Joining date of employee for leave calculation
+    LocalDate joiningDate; //Joining date of employee for leave calculation
+    LocalDate leavesLastResetOn = LocalDate.of(2019,1,1);
     int no_of_maternity_leaves_taken;
     LocalDate maternity_leave_from;
     LocalDate Maternity_leave_till;
+
+    public LocalDate getJoiningDate() {
+        return joiningDate;
+    }
+
+    public void setJoiningDate(LocalDate joiningDate) {
+        this.joiningDate = joiningDate;
+    }
+
+    OptionaLeaves optionaLeaves = new OptionaLeaves();
 
 
     public LocalDate getMaternity_leave_from() {
@@ -88,6 +99,6 @@ public class Empoyee {
     }
 
     public void JoiningDate(LocalDate of) {
-        this.JoiningDate = of;
+        this.joiningDate = of;
     }
 }

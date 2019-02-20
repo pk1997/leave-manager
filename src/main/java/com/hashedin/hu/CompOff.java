@@ -40,4 +40,16 @@ public class CompOff {
             this.availableLeaves +=1;
         }
     }
+    public int avilableCompoffs(LocalDate date)
+    {
+        int avilableCompoffs=0;
+        for (LocalDate dates : WorkedOn)
+        {
+            if(ChronoUnit.DAYS.between(dates,date) <30)
+            {
+                avilableCompoffs +=1;
+            }
+        }
+        return avilableCompoffs;
+    }
 }

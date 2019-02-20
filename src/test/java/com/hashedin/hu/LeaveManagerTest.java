@@ -1,5 +1,6 @@
 package com.hashedin.hu;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -121,6 +122,42 @@ public class LeaveManagerTest {
         Empoyee e = new Empoyee("emp1", 1, 10, Gender.MALE, LocalDate.of(2019, 1, 1));
         LeaveRequest leave = new LeaveRequest(e, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 2, 11), false);
         LeaveResponse response= manager.ApplyLeave(leave);
+    }
+    @Test
+    public void testForOpitonalLeave()
+    {
+        Empoyee e = new Empoyee("emp1", 1, 0, Gender.MALE, LocalDate.of(2019, 1, 1));
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,8,11),LocalDate.of(2019,8,13),false);
+        LeaveResponse response = manager.ApplyLeave(leave);
+        assertEquals(1,leave.empoyee.no_of_leaves_taken);
+    }
+    @Test
+    public void testEmployeeIsApplyingForTwoOptionalLeaves()
+    {
+        Empoyee e = new Empoyee("emp1", 1, 0, Gender.MALE, LocalDate.of(2019, 1, 1));
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,8,11),LocalDate.of(2019,8,13),false);
+        LeaveResponse response = manager.ApplyLeave(leave);
+        LeaveRequest leave2 = new LeaveRequest(e,LocalDate.of(2019,3,19),LocalDate.of(2019,3,19),false);
+        LeaveResponse response1 = manager.ApplyLeave(leave2);
+        assertEquals(2,e.no_of_leaves_taken);
+    }
+    @Test
+    public void tesApplyForSabbatical()
+    {
+        Empoyee e = new Empoyee("emp1", 1, 0, Gender.MALE, LocalDate.of(2019, 1, 1));
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2021,3,1),LocalDate.of(2021,5,1),false);
+        leave.types = LeaveTypes.SABBATICAL;
+        LeaveResponse response = manager.ApplyLeave(leave);
+        assertEquals(LeaveStatus.APPROVED,response.status);
+    }
+    @Test
+    public void testApplyForSabbaticalWothout2YearsOfExperience()
+    {
+        Empoyee e = new Empoyee("emp1", 1, 0, Gender.MALE, LocalDate.of(2019, 1, 1));
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,1),LocalDate.of(2019,5,1),false);
+        leave.types = LeaveTypes.SABBATICAL;
+        LeaveResponse response = manager.ApplyLeave(leave);
+        assertEquals(LeaveStatus.REJECTED,response.status);
     }
 
 }

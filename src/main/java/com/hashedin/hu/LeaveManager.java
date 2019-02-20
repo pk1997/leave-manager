@@ -3,11 +3,8 @@ package com.hashedin.hu;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class LeaveManager {
     //creates instance of accural for getting total number of leaves employee has
@@ -34,6 +31,7 @@ public class LeaveManager {
         {
             if(checkMaternityLeaves(leave))
             {//save the details of maternity leave into employee object
+                leave.empoyee.no_of_maternity_leaves_taken+=1;
                 leave.empoyee.setMaternity_leave_from(leave.startDate);
                 leave.empoyee.setMaternity_leave_till(leave.endDate);
                 //increase the number of maternity leave employee has taken
@@ -72,6 +70,18 @@ public class LeaveManager {
             response.setStatus(LeaveStatus.REJECTED);
             return response;
         }
+        else if(leave.types == LeaveTypes.SABBATICAL)
+        {
+            if(handleSabbatical(leave))
+            {
+                response.setStatus(LeaveStatus.APPROVED);
+            }
+            else
+            {
+                response.setStatus(LeaveStatus.REJECTED);
+            }
+            return response;
+        }
         //if leave is of Normal leave
         if (checkForAvailableLeaves(leave))
         {
@@ -82,24 +92,40 @@ public class LeaveManager {
         return response;
     }
 
+    private boolean handleSabbatical(LeaveRequest leave) {
+        if(ChronoUnit.YEARS.between(leave.empoyee.getJoiningDate(), leave.startDate) >=2
+        && ChronoUnit.DAYS.between(leave.startDate,leave.endDate) > 45
+        && ChronoUnit.MONTHS.between(leave.startDate,leave.endDate) <3)
+        {
+            return true;
+
+        }
+        return false;
+    }
+
+    private boolean checkForOptionalLeaves(LeaveRequest leave) {
+        for (LocalDate date = leave.startDate; date.isBefore(leave.endDate); date = date.plusDays(1)) {
+            if(leave.empoyee.optionaLeaves.checkForOptionalLeaves(date))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
     private boolean handleCompOff(LeaveRequest leave) {
         //check the number of days that employee is applying for compoff
         no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate);
         //check if employee has compoff leaves in his account
         if(leave.empoyee.compOff.availableLeaves>0){
-        ArrayList<LocalDate> date;
-            date = leave.empoyee.compOff.getWorkedOn();
-            if (leave.empoyee.compOff.availableLeaves > 0) {
-                //check if compoff is applied before 30 days that the employee has worked on
-                for (int i = 0; i < date.size(); i++) {
-                    if ((ChronoUnit.DAYS.between(date.get(i), leave.startDate) < 30) &&(ChronoUnit.DAYS.between(leave.startDate, leave.endDate) <= leave.empoyee.compOff.availableLeaves)){
-                        date.remove(i);
-                        leave.empoyee.compOff.availableLeaves -= 1;
-                        return true;
-                    }
-                }
-            }
+        int availableCompoffs = leave.empoyee.compOff.avilableCompoffs(leave.startDate);
+        if (availableCompoffs >= no_of_days)
+        {
+            return true;
+        }
+        return false;
 
         }
         return false;
@@ -158,9 +184,6 @@ public class LeaveManager {
 
     private boolean checkMaternityLeaves(LeaveRequest leave) {
         no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
-
-
-
         if(leave.empoyee.no_of_maternity_leaves_taken >0)
         {
             if(ChronoUnit.DAYS.between(leave.empoyee.getMaternity_leave_till(), leave.startDate) <180 )
@@ -171,7 +194,7 @@ public class LeaveManager {
 
         //if the employee is male or paternity leave is more than 180 days then reject the maternity leave
         if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE || leave.empoyee.no_of_maternity_leaves_taken > 2
-                ||ChronoUnit.DAYS.between(leave.empoyee.JoiningDate, leave.startDate) <180)
+                ||ChronoUnit.DAYS.between(leave.empoyee.joiningDate, leave.startDate) <180)
         {
             return false;
         }
@@ -180,10 +203,14 @@ public class LeaveManager {
     }
 
     private boolean checkForAvailableLeaves (LeaveRequest leave)
-        {
-            //if leave has no blanket coverage then get the no of working days between the leaves applied
+        {//if leave has no blanket coverage then get the no of working days between the leaves applied
+
             if(!leave.blanketCoverage) {
                 no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate);
+            }
+            if(checkForOptionalLeaves(leave))
+            {
+                no_of_days -=1;
             }
 
             else
