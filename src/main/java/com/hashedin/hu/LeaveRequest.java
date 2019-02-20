@@ -4,7 +4,7 @@ package com.hashedin.hu;
 import java.time.LocalDate;
 
 public class LeaveRequest {
-    Empoyee empoyee;
+    Employee empoyee;
     //store the date on which leave was requested default is todays date
     LocalDate requestedDate;
 
@@ -24,11 +24,11 @@ public class LeaveRequest {
     boolean blanketCoverage;
     LeaveTypes types;
 
-    public Empoyee getEmployee() {
+    public Employee getEmployee() {
         return empoyee;
     }
 
-    public void setId(Empoyee empoyee) {
+    public void setId(Employee empoyee) {
         this.empoyee = empoyee;
     }
 
@@ -58,7 +58,7 @@ public class LeaveRequest {
         this.endDate = this.startDate.plusDays(180);
     }
 
-    public LeaveRequest(Empoyee empoyee, LocalDate startDate, LocalDate endDate, boolean blanketCoverage) {
+    public LeaveRequest(Employee empoyee, LocalDate startDate, LocalDate endDate, boolean blanketCoverage) {
         this.empoyee=empoyee;
         this.startDate = startDate;
         this.endDate = endDate;

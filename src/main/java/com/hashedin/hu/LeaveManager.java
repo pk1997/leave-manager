@@ -93,7 +93,7 @@ public class LeaveManager {
     }
 
     private boolean handleSabbatical(LeaveRequest leave) {
-        if(ChronoUnit.YEARS.between(leave.empoyee.getJoiningDate(), leave.startDate) >=2
+        if(ChronoUnit.YEARS.between(leave.empoyee.getJoining_date(), leave.startDate) >=2
         && ChronoUnit.DAYS.between(leave.startDate,leave.endDate) > 45
         && ChronoUnit.MONTHS.between(leave.startDate,leave.endDate) <3)
         {
@@ -194,7 +194,7 @@ public class LeaveManager {
 
         //if the employee is male or paternity leave is more than 180 days then reject the maternity leave
         if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE || leave.empoyee.no_of_maternity_leaves_taken > 2
-                ||ChronoUnit.DAYS.between(leave.empoyee.joiningDate, leave.startDate) <180)
+                ||ChronoUnit.DAYS.between(leave.empoyee.joining_date, leave.startDate) <180)
         {
             return false;
         }
@@ -215,7 +215,7 @@ public class LeaveManager {
 
             else
             {
-                no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
+                no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate);
             }
             /*if number of days the employee is applying leave for is greater
             than the employee has in his account then reject the leave

@@ -5,38 +5,39 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Empoyee {
-    public Empoyee(String employee_name, int employee_id, int no_of_leaves_avilable,Gender gender,LocalDate date) {
-        this.employee_name = employee_name;
-        this.employee_id = employee_id;
+public class Employee {
+    public Employee(String name, int id, int no_of_leaves_avilable, Gender gender, String date) {
+        this.name = name;
+        this.id = id;
         this.total_no_of_leaves = no_of_leaves_avilable;
         this.gender = gender;
-        this.joiningDate = date;
+        this.joining_date = LocalDate.parse(date);
     }
 //properties of employee
-    String employee_name;
-    int employee_id;
+    String name;
+    int id;
     int no_of_leaves_taken = 0;
     int total_no_of_leaves;
     Gender gender;
     ArrayList<LocalDate> fromDate = new ArrayList<LocalDate>();//if leave is taken store starting date here
     ArrayList<LocalDate> toDate = new ArrayList<LocalDate>();//if leave is taken store leave end date here
     CompOff compOff = new CompOff();//Add any compoff here
-    LocalDate joiningDate; //Joining date of employee for leave calculation
+    LocalDate joining_date; //Joining date of employee for leave calculation
     LocalDate leavesLastResetOn = LocalDate.of(2019,1,1);
     int no_of_maternity_leaves_taken;
     LocalDate maternity_leave_from;
     LocalDate Maternity_leave_till;
-
-    public LocalDate getJoiningDate() {
-        return joiningDate;
-    }
-
-    public void setJoiningDate(LocalDate joiningDate) {
-        this.joiningDate = joiningDate;
-    }
-
     OptionaLeaves optionaLeaves = new OptionaLeaves();
+
+    public LocalDate getJoining_date() {
+        return joining_date;
+    }
+
+    public void setJoining_date(LocalDate joining_date) {
+        this.joining_date = joining_date;
+    }
+
+
 
 
     public LocalDate getMaternity_leave_from() {
@@ -55,24 +56,24 @@ public class Empoyee {
         Maternity_leave_till = maternity_leave_till;
     }
 
-    public String getEmployee_name() {
-        return employee_name;
+    public String getName() {
+        return name;
     }
     public void addCompoff(LocalDateTime login,LocalDateTime logout)
     {
         this.compOff.setWorkedOn(login,logout);
     }
 
-    public void setEmployee_name(String employee_name) {
-        this.employee_name = employee_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getId() {
+        return id;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getTotal_no_of_leaves() {
@@ -99,6 +100,6 @@ public class Empoyee {
     }
 
     public void JoiningDate(LocalDate of) {
-        this.joiningDate = of;
+        this.joining_date = of;
     }
 }

@@ -14,11 +14,11 @@ public class LeaveAccrual {
         holidaysLeft = 0;
     }
 
-    public void addLeavesMonthly(Empoyee e , LocalDate date)
+    public void addLeavesMonthly(Employee e , LocalDate date)
     {   LocalDate holidayCalculatedFrom;
-        if(e.getJoiningDate().isAfter(e.leavesLastResetOn))
+        if(e.getJoining_date().isAfter(e.leavesLastResetOn))
         {
-            holidayCalculatedFrom = e.joiningDate;
+            holidayCalculatedFrom = e.joining_date;
         }
         else
         {
@@ -39,11 +39,11 @@ public class LeaveAccrual {
         {
             holidaysLeft = (int) ((monthsBetween-no_holiday_months) *2);
         }
-        e.total_no_of_leaves += holidaysLeft;
+        e.total_no_of_leaves = holidaysLeft;
 
     }
 
-    private long checkIfEmployeeHasTakenMaternityLeave(Empoyee e,LocalDate date) {
+    private long checkIfEmployeeHasTakenMaternityLeave(Employee e, LocalDate date) {
         long no_of_months=0;
         if (e.no_of_maternity_leaves_taken > 0) {
             //if employee has taken maternity leaves

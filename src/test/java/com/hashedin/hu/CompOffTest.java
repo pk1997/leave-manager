@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class CompOffTest {
     LeaveManager manager = new LeaveManager();
-    Empoyee e1 = new Empoyee("e1",1,0,Gender.MALE, LocalDate.of(2019,1,1));
+    Employee e1 = new Employee("e1",1,0,Gender.MALE, "2019-01-01");
     @Test
     public void testCompOffNotAddedIfLogWorkLessThan8hrs(){
         e1.addCompoff(LocalDateTime.of(2019, Month.FEBRUARY,1,10,10),LocalDateTime.of(2019,Month.FEBRUARY,1,11,1,1));

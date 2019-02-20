@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 public class ExecutorService {
     LeaveAccrual accrual = new LeaveAccrual();
-    public void scheduler(Empoyee empoyee)
+    public void scheduler(Employee empoyee)
     {
         ScheduledExecutorService execService
                 =   Executors.newScheduledThreadPool(5);
