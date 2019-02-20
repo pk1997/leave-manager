@@ -12,8 +12,10 @@ public class main {
     public static void readDataFromCsv(String file)
     {
         try {
-            // Create an object of file reader
-            // class with CSV file as a parameter.
+            /*
+            Create an object of file reader
+            class with CSV file as a parameter.
+            */
 
             FileReader filereader = new FileReader(file);
 
