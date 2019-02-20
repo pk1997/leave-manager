@@ -1,21 +1,39 @@
 package com.hashedin.hu;
-
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Arrays;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
+import java.io.FileReader;
 import java.util.List;
 
 public class main {
     public static void main(String args[])
     {
-        LocalDate startDate = LocalDate.of(2019,1,6);
-        LocalDate endDate = LocalDate.of(2019,6,6);
+        readDataFromCsv("/home/panvan_k/IdeaProjects/huleavemanager/src/main/java/com/hashedin/hu/data.csv");
+    }
+    public static void readDataFromCsv(String file)
+    {
+        try {
+            // Create an object of file reader
+            // class with CSV file as a parameter.
 
-        long monthsBetween = ChronoUnit.MONTHS.between(startDate.withDayOfMonth(1),
-                endDate.withDayOfMonth(1))+1;
-        System.out.println(monthsBetween);
+            FileReader filereader = new FileReader(file);
+
+            // create csvReader object and skip first Line
+            CSVReader csvReader = new CSVReaderBuilder(filereader)
+                    .withSkipLines(1)
+                    .build();
+            List<String[]> allData = csvReader.readAll();
+            System.out.println(allData);
+            // print Data
+            for (String[] row : allData) {
+                for (String cell : row) {
+                    System.out.print(cell + "\t");
+                }
+                System.out.println();
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
