@@ -1,0 +1,19 @@
+package com.hashedin.hu;
+
+import java.time.LocalDate;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+public class ExecutorService {
+    LeaveAccrual accrual = new LeaveAccrual();
+    public void scheduler(Empoyee empoyee)
+    {
+        ScheduledExecutorService execService
+                =   Executors.newScheduledThreadPool(5);
+        execService.scheduleAtFixedRate(()->{
+            accrual.addLeavesMonthly(empoyee, LocalDate.now());
+        }, 0, 30, TimeUnit.DAYS);
+
+    }
+}

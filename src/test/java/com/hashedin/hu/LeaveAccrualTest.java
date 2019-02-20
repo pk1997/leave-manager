@@ -42,5 +42,12 @@ public class LeaveAccrualTest {
         accrual.addLeavesMonthly(e2,LocalDate.of(2019,2,1));
         assertEquals(2,e2.total_no_of_leaves);
     }
+    @Test
+    public void testForSchedulerWorking()
+    {
+        ExecutorService service = new ExecutorService();
+        accrual.addLeavesMonthly(e1,LocalDate.now());
+        assertEquals(1,e1.total_no_of_leaves);
+    }
 
 }
