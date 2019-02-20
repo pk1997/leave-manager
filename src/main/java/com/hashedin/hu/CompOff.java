@@ -7,8 +7,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class CompOff {
-
-    int availableLeaves;
+        int availableLeaves;
 
     {
         availableLeaves = 0;

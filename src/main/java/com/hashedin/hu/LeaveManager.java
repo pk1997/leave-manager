@@ -103,7 +103,7 @@ public class LeaveManager {
         return false;
     }
 
-    private boolean checkForOptionalLeaves(LeaveRequest leave) {
+    /*private boolean checkForOptionalLeaves(LeaveRequest leave) {
         for (LocalDate date = leave.startDate; date.isBefore(leave.endDate); date = date.plusDays(1)) {
             if(leave.empoyee.optionaLeaves.checkForOptionalLeaves(date))
             {
@@ -112,7 +112,7 @@ public class LeaveManager {
         }
 
         return false;
-    }
+    }*/
 
 
     private boolean handleCompOff(LeaveRequest leave) {
@@ -208,10 +208,10 @@ public class LeaveManager {
             if(!leave.blanketCoverage) {
                 no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate);
             }
-            if(checkForOptionalLeaves(leave))
+           /* if(checkForOptionalLeaves(leave))
             {
                 no_of_days -=1;
-            }
+            }*/
 
             else
             {

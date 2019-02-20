@@ -1,4 +1,4 @@
-package com.hashedin.hu;
+/*package com.hashedin.hu;
 import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
@@ -27,12 +27,12 @@ public class EmployeeController {
         return store.getLeaveBalance(id);
     }
     @RequestMapping(value = "/employee/", method = RequestMethod.POST)
-    public Employee createUser(@RequestBody Employee employee, UriComponentsBuilder ucBuilder) {
-        if (store.isExist(employee)) {
+    public @ResponseBody Employee createUser(@RequestBody Employee employee, UriComponentsBuilder ucBuilder) {
+        if (store.addEmployee(employee)) {
 
         }
         return employee;
     }
 
 
-}
+}*/
