@@ -7,8 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class LeaveAccrual {
-    private long monthsBetween;
-    private int holidaysLeft;
+    private long monthsBetween;//contains the no of months employee has worked for
+    private int holidaysLeft;//contains number of holidays that employee has earned for working
 
     {
         holidaysLeft = 0;

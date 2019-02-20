@@ -16,6 +16,7 @@ public class LeaveManager {
     public int leaves_available = 0;
     private long no_of_days = 0;
 
+
     public LeaveResponse ApplyLeave(LeaveRequest leave)
     {   //Credit check the number of leaves to employee until the requested date
         accural.addLeavesMonthly(leave.empoyee,leave.getRequestedDate());
@@ -157,8 +158,20 @@ public class LeaveManager {
 
     private boolean checkMaternityLeaves(LeaveRequest leave) {
         no_of_days = ChronoUnit.DAYS.between(leave.startDate, leave.endDate);
+
+
+
+        if(leave.empoyee.no_of_maternity_leaves_taken >0)
+        {
+            if(ChronoUnit.DAYS.between(leave.empoyee.getMaternity_leave_till(), leave.startDate) <180 )
+            {
+                return  false;
+            }
+        }
+
         //if the employee is male or paternity leave is more than 180 days then reject the maternity leave
-        if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE || leave.empoyee.no_of_maternity_leaves_taken > 2)
+        if (no_of_days > 180 || leave.empoyee.gender != Gender.FEMALE || leave.empoyee.no_of_maternity_leaves_taken > 2
+                ||ChronoUnit.DAYS.between(leave.empoyee.JoiningDate, leave.startDate) <180)
         {
             return false;
         }

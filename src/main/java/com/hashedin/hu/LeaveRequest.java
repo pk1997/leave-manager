@@ -51,7 +51,14 @@ public class LeaveRequest {
     {
         this.types = type;
     }
-    public LeaveRequest(Empoyee empoyee, LocalDate startDate, LocalDate endDate,boolean blanketCoverage) {
+
+    public void setMaternityLeave()
+    {
+        this.types = LeaveTypes.MATERNITY;
+        this.endDate = this.startDate.plusDays(180);
+    }
+
+    public LeaveRequest(Empoyee empoyee, LocalDate startDate, LocalDate endDate, boolean blanketCoverage) {
         this.empoyee=empoyee;
         this.startDate = startDate;
         this.endDate = endDate;

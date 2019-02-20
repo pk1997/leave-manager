@@ -40,19 +40,12 @@ public class LeaveManagerTest {
     @Test
     public void testMaternityLeave(){
         Empoyee e = new Empoyee("emp4",5,20,Gender.FEMALE,LocalDate.of(2019,1,1));
-        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,1),LocalDate.of(2019,8,5),true);
-        leave.setTypes(LeaveTypes.MATERNITY);
+        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,7,1),null,true);
+        leave.setMaternityLeave();
         LeaveResponse response = manager.ApplyLeave(leave);
         assertEquals(response.status,LeaveStatus.APPROVED);
     }
-    @Test
-    public void testMaternityLeaveMoreThan6Mos(){
-        Empoyee e = new Empoyee("emp4",5,20,Gender.FEMALE,LocalDate.of(2019,1,1));
-        LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,1),LocalDate.of(2019,11,5),true);
-        leave.setTypes(LeaveTypes.MATERNITY);
-        LeaveResponse response = manager.ApplyLeave(leave);
-        assertEquals(response.status,LeaveStatus.REJECTED);
-    }
+
     @Test
     public void testMaternityLeaveForMale(){
         Empoyee e = new Empoyee("emp4",5,20,Gender.MALE,LocalDate.of(2019,1,1));
@@ -122,6 +115,12 @@ public class LeaveManagerTest {
     Empoyee e = new Empoyee("emp1", 1, 10, Gender.MALE, LocalDate.of(2019, 1, 1));
     LeaveRequest leave = new LeaveRequest(e, LocalDate.of(2019, 3, 10), LocalDate.of(2019, 3, 1), false);
     LeaveResponse response = manager.ApplyLeave(leave);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void testApplyLeaveForPastDate(){
+        Empoyee e = new Empoyee("emp1", 1, 10, Gender.MALE, LocalDate.of(2019, 1, 1));
+        LeaveRequest leave = new LeaveRequest(e, LocalDate.of(2019, 2, 10), LocalDate.of(2019, 2, 11), false);
+        LeaveResponse response= manager.ApplyLeave(leave);
     }
 
 }
