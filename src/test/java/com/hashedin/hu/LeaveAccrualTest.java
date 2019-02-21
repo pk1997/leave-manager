@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class LeaveAccrualTest {
-    Employee e1 = new Employee("e1",1,0,Gender.FEMALE, "2019-01-16");
-    Employee e2 = new Employee("e1",1,0,Gender.FEMALE, "2019-01-10");
+    Employee e1 = new Employee("e1", (long) 1,0,Gender.FEMALE, "2019-01-16");
+    Employee e2 = new Employee("e1", (long) 1,0,Gender.FEMALE, "2019-01-10");
 
     LeaveAccrual accrual = new LeaveAccrual();
     LeaveManager manager = new LeaveManager();

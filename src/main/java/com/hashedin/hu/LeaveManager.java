@@ -1,13 +1,18 @@
 //Checks whether leave application is to be approved or rejected
 package com.hashedin.hu;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
+@Service
 public class LeaveManager {
     //creates instance of accural for getting total number of leaves employee has
+
+
     LeaveAccrual accural = new LeaveAccrual();
     //initialization of number of leaves available to employee
     public int leaves_available = 0;
@@ -208,10 +213,10 @@ public class LeaveManager {
             if(!leave.blanketCoverage) {
                 no_of_days = getWorkingDaysBetweenTwoDays(leave.startDate,leave.endDate);
             }
-            if(checkForOptionalLeaves(leave))
+           /* if(checkForOptionalLeaves(leave))
             {
                 no_of_days -=1;
-            }
+            }*/
 
             else
             {
@@ -220,7 +225,7 @@ public class LeaveManager {
             /*if number of days the employee is applying leave for is greater
             than the employee has in his account then reject the leave
              */
-            if(no_of_days >= leaves_available)
+            if(no_of_days > leaves_available)
             {
                 return false;
             }

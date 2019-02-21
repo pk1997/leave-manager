@@ -1,10 +1,60 @@
 package com.hashedin.hu;
 //create leave applications using this class
 
+import javax.persistence.*;
 import java.time.LocalDate;
-
+@Entity
 public class LeaveRequest {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
+    LocalDate startDate;
+    LocalDate endDate;
+    boolean blanketCoverage;
+    LeaveTypes types;
+    @ManyToOne
+    @JoinColumn(name = "Employee")
     Employee empoyee;
+    int emp_id;
+
+    public int getEmp_id() {
+        return emp_id;
+    }
+
+    public void setEmp_id(int emp_id) {
+        this.emp_id = emp_id;
+    }
+//store the date o
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isBlanketCoverage() {
+        return blanketCoverage;
+    }
+
+    public void setBlanketCoverage(boolean blanketCoverage) {
+        this.blanketCoverage = blanketCoverage;
+    }
+
+    public LeaveTypes getTypes() {
+        return types;
+    }
+
+    public Employee getEmpoyee() {
+        return empoyee;
+    }
+
+    public void setEmpoyee(Employee empoyee) {
+        this.empoyee = empoyee;
+    }
+
     //store the date on which leave was requested default is todays date
     LocalDate requestedDate;
 
@@ -19,18 +69,12 @@ public class LeaveRequest {
         this.requestedDate = requestedDate;
     }
 
-    LocalDate startDate;
-    LocalDate endDate;
-    boolean blanketCoverage;
-    LeaveTypes types;
+
 
     public Employee getEmployee() {
         return empoyee;
     }
 
-    public void setId(Employee empoyee) {
-        this.empoyee = empoyee;
-    }
 
     public LocalDate getStartDate() {
         return startDate;
