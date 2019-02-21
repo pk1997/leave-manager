@@ -17,6 +17,13 @@ public class Employee {
     this.total_no_of_leaves = total_no_of_leaves;
     this.gender = gender;
     }
+    public Employee(String name,String doj,int total_no_of_leaves,String gender)
+    {
+        this.name = name;
+        this.joining_date = LocalDate.parse(doj);
+        this.total_no_of_leaves = total_no_of_leaves;
+        this.gender = Gender.valueOf(gender);
+    }
 
     public int getNo_of_leaves_taken() {
         return no_of_leaves_taken;

@@ -10,9 +10,9 @@ import java.util.List;
 public class EmpController {
     @Autowired
     private EmployeeService employeeService;
-    @RequestMapping("/employees")
-    public void allEmployees() {
-        Employee e2 = new Employee("pavan","2019-01-01",10,Gender.MALE);
+    @RequestMapping("/add2")
+    public void add2() {
+        Employee e2 = new Employee("suman","2019-01-01",10,"MALE");
         employeeService.addEmployee(e2);
     }
     @RequestMapping("/seeemployee")
