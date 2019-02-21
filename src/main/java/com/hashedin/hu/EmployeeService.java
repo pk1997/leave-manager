@@ -26,5 +26,11 @@ public class EmployeeService {
         }
         return null;
     }
+
+    public Employee updateUser(Employee currentEmployee) {
+        Employee currentEmployee1 = currentEmployee;
+        employeeRepository.save(currentEmployee1);
+        return currentEmployee1;
+    }
 }
 

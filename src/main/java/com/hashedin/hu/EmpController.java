@@ -38,5 +38,30 @@ public class EmpController {
         headers.setLocation(ucBuilder.path("/employees/{id}").buildAndExpand(employee.getId()).toUri());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
+    @RequestMapping(value = "/employee/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody Employee employee) {
+        Employee currentEmployee = employeeService.getEmployeeByID(id);
+
+        if (currentEmployee == null) {
+            return new ResponseEntity("Employee not found",
+                    HttpStatus.NOT_FOUND);
+        }
+
+        currentEmployee.setName(employee.getName());
+        currentEmployee.setGender(employee.getGender());
+        currentEmployee.setJoining_date(employee.getJoining_date());
+        currentEmployee.setNo_of_leaves_taken(employee.no_of_leaves_taken);
+        currentEmployee.setFromDate(employee.fromDate);
+        currentEmployee.setToDate(employee.toDate);
+        currentEmployee.setMaternity_leave_from(employee.maternity_leave_from);
+        currentEmployee.setMaternity_leave_till(employee.Maternity_leave_till);
+        currentEmployee.setLeavesLastResetOn(employee.leavesLastResetOn);
+        currentEmployee.setCompOff(employee.compOff);
+        currentEmployee.setOptionaLeaves(employee.optionaLeaves);
+        currentEmployee.setNo_of_maternity_leaves_taken(employee.no_of_maternity_leaves_taken);
+
+        employeeService.updateUser(currentEmployee);
+        return new ResponseEntity<Employee>(currentEmployee, HttpStatus.OK);
+    }
 }
 
