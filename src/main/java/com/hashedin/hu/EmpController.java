@@ -42,9 +42,7 @@ public class EmpController {
     public ResponseEntity<?> updateUser(@PathVariable("id") long id, @RequestBody Employee employee) {
         Employee currentEmployee = employeeService.getEmployeeByID(id);
 
-        if (currentEmployee == null) {
-            return new ResponseEntity("Employee not found",
-                    HttpStatus.NOT_FOUND);
+        if (currentEmployee == null) {return new ResponseEntity("Employee not found",HttpStatus.NOT_FOUND);
         }
 
         currentEmployee.setName(employee.getName());

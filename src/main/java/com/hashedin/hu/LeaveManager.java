@@ -12,10 +12,11 @@ import java.util.ArrayList;
 public class LeaveManager {
     //creates instance of accural for getting total number of leaves employee has
 
-
+    @Autowired
+    EmployeeRepository employeeRepository;
     LeaveAccrual accural = new LeaveAccrual();
     //initialization of number of leaves available to employee
-    public int leaves_available = 0;
+    private int leaves_available = 0;
     private long no_of_days = 0;
 
 
@@ -44,6 +45,7 @@ public class LeaveManager {
                 response.setStatus(LeaveStatus.APPROVED);
                 response.setComment("enjoy the maternity leave");
                 leave.empoyee.addLeave(leave.startDate,leave.endDate);
+                saveToRepository(leave);
                 return response;
             }
             else {
@@ -58,6 +60,7 @@ public class LeaveManager {
             {
                 response.setStatus(LeaveStatus.APPROVED);
                 leave.empoyee.addLeave(leave.startDate,leave.endDate);
+                saveToRepository(leave);
                 return response;
             }
             response.setStatus(LeaveStatus.REJECTED);
@@ -70,6 +73,7 @@ public class LeaveManager {
             {
                 response.setStatus(LeaveStatus.APPROVED);
                 leave.empoyee.addLeave(leave.startDate,leave.endDate);
+                saveToRepository(leave);
                 return response;
             }
             response.setStatus(LeaveStatus.REJECTED);
@@ -78,7 +82,7 @@ public class LeaveManager {
         else if(leave.types == LeaveTypes.SABBATICAL)
         {
             if(handleSabbatical(leave))
-            {
+            {   saveToRepository(leave);
                 response.setStatus(LeaveStatus.APPROVED);
             }
             else
@@ -93,8 +97,15 @@ public class LeaveManager {
             response.setStatus(LeaveStatus.APPROVED);
             leave.empoyee.addLeave(leave.startDate,leave.endDate);
             leave.empoyee.no_of_leaves_taken+=1;
+            saveToRepository(leave);
         }
         return response;
+    }
+
+    private void saveToRepository(LeaveRequest leave) {
+        if(leave.getEmp_id()!=0) {
+            employeeRepository.save(leave.empoyee);
+        }
     }
 
     private boolean handleSabbatical(LeaveRequest leave) {
@@ -231,7 +242,7 @@ public class LeaveManager {
             }
             return true;
         }
-    public void isDateValid(LeaveRequest leave)
+    private void isDateValid(LeaveRequest leave)
     {
         if (leave.endDate.isBefore(leave.startDate))
         {
