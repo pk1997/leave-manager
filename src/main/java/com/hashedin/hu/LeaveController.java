@@ -21,6 +21,10 @@ public class LeaveController {
     public ResponseEntity<Void> createEmployee(@RequestBody LeaveRequest request, UriComponentsBuilder ucBuilder){
         System.out.println("Applying leave ");
         request.empoyee = employeeService.getEmployeeByID((long) request.getEmp_id());
+        if(request.empoyee == null)
+        {
+            return new ResponseEntity("Employee with id:" + request.getEmp_id()+ "not found",HttpStatus.NOT_FOUND);
+        }
         LeaveResponse response = leaveService.applyLeave(request);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity(response.status, HttpStatus.CREATED);
