@@ -20,5 +20,11 @@ public class EmployeeService {
         employeeRepository.findAll().forEach(employees::add);
         return employees;
     }
+    public Employee getEmployeeByID(Long id){
+        if(employeeRepository.existsById(id)) {
+            return employeeRepository.findById(id).get();
+        }
+        return null;
+    }
 }
 
