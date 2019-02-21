@@ -1,6 +1,8 @@
 //Employee class to store data of employee details
 package com.hashedin.hu;
 
+
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -8,6 +10,14 @@ import javax.persistence.*;
 
 @Entity
 public class Employee {
+    public Employee(String name,String doj,int total_no_of_leaves,Gender gender)
+    {
+    this.name = name;
+    this.joining_date = LocalDate.parse(doj);
+    this.total_no_of_leaves = total_no_of_leaves;
+    this.gender = gender;
+    }
+
     public int getNo_of_leaves_taken() {
         return no_of_leaves_taken;
     }
@@ -56,13 +66,13 @@ public class Employee {
         this.leavesLastResetOn = leavesLastResetOn;
     }
 
-    //public OptionaLeaves getOptionaLeaves() {
-    //    return optionaLeaves;
-    //}
+    public OptionaLeaves getOptionaLeaves() {
+        return optionaLeaves;
+    }
 
-    //public void setOptionaLeaves(OptionaLeaves optionaLeaves) {
-     //   this.optionaLeaves = optionaLeaves;
-    //}
+    public void setOptionaLeaves(OptionaLeaves optionaLeaves) {
+       this.optionaLeaves = optionaLeaves;
+    }
 
     public int getNo_of_maternity_leaves_taken() {
         return no_of_maternity_leaves_taken;
@@ -82,6 +92,7 @@ public class Employee {
 //properties of employee
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(updatable = false,nullable = false)
     Long id;
     String name;
     int no_of_leaves_taken = 0;
@@ -93,13 +104,13 @@ public class Employee {
     CompOff compOff = new CompOff();//Add any compoff here
     LocalDate joining_date; //Joining date of employee for leave calculation
     LocalDate leavesLastResetOn = LocalDate.of(2019,1,1);
-    /*@Embedded
-    OptionaLeaves optionaLeaves = new OptionaLeaves();*/
+    @Embedded
+    OptionaLeaves optionaLeaves = new OptionaLeaves();
     int no_of_maternity_leaves_taken = 0;
 
 
-    //@Override
-    /*public String toString() {
+    @Override
+    public String toString() {
         return "Employee{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -116,7 +127,7 @@ public class Employee {
                 ", Maternity_leave_till=" + Maternity_leave_till +
                 ", optionaLeaves=" + optionaLeaves +
                 '}';
-    }*/
+    }
 
     LocalDate maternity_leave_from;
     LocalDate Maternity_leave_till;

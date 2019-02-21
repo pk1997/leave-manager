@@ -103,7 +103,7 @@ public class LeaveManager {
         return false;
     }
 
-    /*private boolean checkForOptionalLeaves(LeaveRequest leave) {
+    private boolean checkForOptionalLeaves(LeaveRequest leave) {
         for (LocalDate date = leave.startDate; date.isBefore(leave.endDate); date = date.plusDays(1)) {
             if(leave.empoyee.optionaLeaves.checkForOptionalLeaves(date))
             {
@@ -112,7 +112,7 @@ public class LeaveManager {
         }
 
         return false;
-    }*/
+    }
 
 
     private boolean handleCompOff(LeaveRequest leave) {

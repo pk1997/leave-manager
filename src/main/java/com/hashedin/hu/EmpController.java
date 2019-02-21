@@ -12,8 +12,8 @@ public class EmpController {
     private EmployeeService employeeService;
     @RequestMapping("/employees")
     public void allEmployees() {
-        Employee e = new Employee("pavan", (long) 1, 10, Gender.MALE, "2019-01-01");
-        employeeService.addEmployee(e);
+        Employee e2 = new Employee("pavan","2019-01-01",10,Gender.MALE);
+        employeeService.addEmployee(e2);
     }
     @RequestMapping("/seeemployee")
     public List<Employee> getEmployees(){

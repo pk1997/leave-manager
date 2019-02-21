@@ -9,6 +9,10 @@ import java.util.ArrayList;
 public class CompOff {
         int availableLeaves;
 
+    public void setWorkedOn(ArrayList<LocalDate> workedOn) {
+        WorkedOn = workedOn;
+    }
+
     {
         availableLeaves = 0;
     }
