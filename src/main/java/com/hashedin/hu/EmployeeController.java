@@ -79,5 +79,17 @@ public class EmployeeController {
         return new ResponseEntity(HttpStatus.NO_CONTENT);
 
     }
+    @RequestMapping (value = "employee/{id}/workedhours",method = RequestMethod.POST)
+    public ResponseEntity<?> logWorkHours(@PathVariable("id") int id,@RequestBody LogHours hours)
+    {
+        Employee employee = employeeService.getEmployeeByID((long) id);
+        if(employee == null){
+            return new ResponseEntity("unable to find user with id " + id ,HttpStatus.NOT_FOUND);
+        }
+        employeeService.logHours(employee,hours);
+        return new ResponseEntity("Successfully logged",HttpStatus.NO_CONTENT);
+
+
+    }
 }
 
