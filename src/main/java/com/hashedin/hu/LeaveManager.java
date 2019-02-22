@@ -58,14 +58,7 @@ public class LeaveManager {
         accural.addLeavesMonthly(leave.getEmployee(),leave.getRequestedDate());
         //calculate the number of leaves employee has
         leavesAvailable = leave.getEmployee().getLeavesCarriedFromLastYear()+leave.getEmployee().getTotalNoOfLeaves() -leave.getEmployee().getNoOfLeavesTaken();
-        isDateValid(leave);
         LeaveResponse response= new LeaveResponse(LeaveStatus.REJECTED,"");
-        if(checkForOverlap(leave))
-        {   //if leave is duplicate i.e employee has already applied for leave on the same date reject the leave
-            response.setStatus(LeaveStatus.REJECTED);
-            response.setComment("duplicate request");
-            return response;
-        }
         if(leave.getTypes() == LeaveTypes.MATERNITY)
         {
             if(checkMaternityLeaves(leave))
@@ -87,6 +80,15 @@ public class LeaveManager {
                 response.setStatus(LeaveStatus.REJECTED);
                 return  response;
             }
+        }
+        //check for valid dates
+        isDateValid(leave);
+
+        if(checkForOverlap(leave))
+        {   //if leave is duplicate i.e employee has already applied for leave on the same date reject the leave
+            response.setStatus(LeaveStatus.REJECTED);
+            response.setComment("duplicate request");
+            return response;
         }
         //check for paternity leave
         else if(leave.getTypes() == LeaveTypes.PATERNITY)
@@ -237,6 +239,7 @@ public class LeaveManager {
     }
 
     private boolean checkMaternityLeaves(LeaveRequest leave) {
+        leave.setEndDate(leave.getStartDate().plusDays(180));
         noOfDays = ChronoUnit.DAYS.between(leave.getStartDate(), leave.getEndDate());
         if(leave.empoyee.getNoOfMaternityLeavesTaken() >0)
         {
