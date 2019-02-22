@@ -1,6 +1,8 @@
 package com.hashedin.hu;
 //create leave applications using this class
 
+import com.hashedin.hu.models.LeaveTypes;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 @Entity

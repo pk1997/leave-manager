@@ -1,4 +1,6 @@
-package com.hashedin.hu;
+package com.hashedin.hu.models;
+
+import com.hashedin.hu.models.LeaveStatus;
 
 public class LeaveResponse {
     private LeaveStatus status;

@@ -1,5 +1,6 @@
 package com.hashedin.hu;
 
+import com.hashedin.hu.models.LeaveResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

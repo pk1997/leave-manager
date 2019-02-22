@@ -1,5 +1,6 @@
 package com.hashedin.hu;
 
+import com.hashedin.hu.models.Gender;
 import org.junit.Test;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,7 @@ import static org.junit.Assert.*;
 
 public class CompOffTest {
     LeaveManager manager = new LeaveManager();
-    Employee e1 = new Employee("e1", (long) 1,0,Gender.MALE, "2019-01-01");
+    Employee e1 = new Employee("e1", (long) 1,0, Gender.MALE, "2019-01-01");
     @Test
     public void testCompOffNotAddedIfLogWorkLessThan8hrs(){
         e1.addCompoff(LocalDateTime.of(2019, Month.FEBRUARY,1,10,10),LocalDateTime.of(2019,Month.FEBRUARY,1,11,1,1));

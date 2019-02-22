@@ -1,4 +1,4 @@
-package com.hashedin.hu;
+package com.hashedin.hu.readcsv;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;

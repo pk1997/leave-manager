@@ -1,4 +1,4 @@
-package com.hashedin.hu;
+package com.hashedin.hu.models;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

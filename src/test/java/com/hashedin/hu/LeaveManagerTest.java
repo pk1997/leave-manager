@@ -1,5 +1,9 @@
 package com.hashedin.hu;
 
+import com.hashedin.hu.models.Gender;
+import com.hashedin.hu.models.LeaveResponse;
+import com.hashedin.hu.models.LeaveStatus;
+import com.hashedin.hu.models.LeaveTypes;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -17,7 +21,7 @@ public class LeaveManagerTest {
         Employee e = new Employee("emp1", (long) 1,10, Gender.MALE,"2019-01-01");
         LeaveRequest leave = new LeaveRequest(e, LocalDate.of(2019,3,1), LocalDate.of(2019,3,4),true);
         LeaveResponse response = manager.applyLeave(leave);
-        assertEquals(response.getStatus(),LeaveStatus.APPROVED);
+        assertEquals(response.getStatus(), LeaveStatus.APPROVED);
     }
     @Test
     public void testLeaveMoreThanEmpHas() {

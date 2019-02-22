@@ -3,6 +3,10 @@ package com.hashedin.hu;
 
 
 
+import com.hashedin.hu.models.CompOff;
+import com.hashedin.hu.models.Gender;
+import com.hashedin.hu.models.OptionaLeaves;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

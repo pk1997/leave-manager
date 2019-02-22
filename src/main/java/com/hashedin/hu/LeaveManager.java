@@ -1,6 +1,10 @@
 //Checks whether leave application is to be approved or rejected
 package com.hashedin.hu;
 
+import com.hashedin.hu.models.Gender;
+import com.hashedin.hu.models.LeaveResponse;
+import com.hashedin.hu.models.LeaveStatus;
+import com.hashedin.hu.models.LeaveTypes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -78,6 +82,7 @@ public class LeaveManager {
             }
             else {
                 response.setStatus(LeaveStatus.REJECTED);
+                response.setComment("You cant apply for materity leave please check conditions");
                 return  response;
             }
         }
@@ -101,6 +106,8 @@ public class LeaveManager {
                 return response;
             }
             response.setStatus(LeaveStatus.REJECTED);
+            response.setComment("only MALE can apply for paternity leave");
+            return response;
 
         }
         //check if holiday is of type COMP_OFF
@@ -136,6 +143,7 @@ public class LeaveManager {
             leave.empoyee.setNoOfLeavesTaken(leave.empoyee.getNoOfLeavesTaken() +1);
             saveToRepository(leave);
         }
+        response.setComment("please check your leave balance");
         return response;
     }
 

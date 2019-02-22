@@ -1,5 +1,7 @@
 package com.hashedin.hu;
 
+import com.hashedin.hu.models.CompOff;
+import com.hashedin.hu.models.LogHours;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,7 +52,7 @@ public class EmployeeService {
     }
 
     public void logHours(Employee employee, LogHours hours) {
-        employee.getCompOff().setWorkedOn(hours.from,hours.to);
+        employee.getCompOff().setWorkedOn(hours.getFrom(),hours.getTo());
         employeeRepository.save(employee);
         return;
     }
