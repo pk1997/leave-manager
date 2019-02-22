@@ -10,13 +10,14 @@ Steps to use API's
         joiningDate                 string          should be of form yyyy-mm-dd
         gender                      string          accepted values MALE,FEMALE
         leavesCarriedFromLastYear   int             if any leaves are carried from last year update this variable
+#
     4)url: '/employee/{id}', method:'PUT'      function: Updates the employee data
 note:same params as the post but you cannot update name and id of employee
 #
        5)url: '/employee/{id}' method: 'DELETE'    function: deletes the employee 
        6)url: '/employee/{id}/workedhours' method:'POST' function:used to log hours for compoff
 #accpeted parameters
-        parameters              datatype            Comments
+#        parameters              datatype            Comments
         from                    string              should be of type "yyyy-mm-ddThh:mm:ss"
         to                      string              should be of type "yyyy-mm-ddThh:mm:ss"
 ### saves only if the working day is holiday and working hours is more than 8
