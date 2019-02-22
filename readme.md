@@ -1,10 +1,11 @@
 Steps to use API's
 **{} => variable;**
-1) url:'/employee',       method:'GET',   function 'gives out the list of employees stored in database'
-2) url: '/employee/{id}', method:'POST',  function:'returns the employee details of id mentioned in url    
-3) url: '/employee/',     method:'POST'   function:'Creates new employee'
-accepted parameters
-##        Parameters                  Datatype        Comments
+##  steps to use api 
+    url:'/employee',       method:'GET',   function 'gives out the list of employees stored in database'
+    url: '/employee/{id}', method:'POST',  function:'returns the employee details of id mentioned in url    
+    url: '/employee/',     method:'POST'   function:'Creates new employee'
+#accepted parameters
+        Parameters                  Datatype        Comments
         name                        String          na
         joiningDate                 string          should be of form yyyy-mm-dd
         gender                      string          accepted values MALE,FEMALE
@@ -13,7 +14,8 @@ accepted parameters
    note:same params as the post but you cannot update name and id of employee
 5)url: '/employee/{id}' method: 'DELETE'    function: deletes the employee 
 6)url: '/employee/{id}/workedhours' method:'POST' function:used to log hours for compoff
-#       parameters              datatype            Comments
+#accpeted parameters
+        parameters              datatype            Comments
         from                    string              should be of type "yyyy-mm-ddThh:mm:ss"
         to                      string              should be of type "yyyy-mm-ddThh:mm:ss"
 ### saves only if the working day is holiday and working hours is more than 8
@@ -21,7 +23,7 @@ accepted parameters
 
 #Meaning of parameters returned
 
-##   Parameters              Comments
+    Parameters              Comments
     id                      id of the employee
     name                    name of the employee
     noOfLeavesTaken         leaves taken by employee on this calender year
