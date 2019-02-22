@@ -5,7 +5,7 @@ Steps to use API's
     url: '/employee/{id}', method:'POST',  function:'returns the employee details of id mentioned in url    
     url: '/employee/',     method:'POST'   function:'Creates new employee'
 #accepted parameters
-        Parameters                  Datatype        Comments
+#        Parameters                  Datatype        Comments
         name                        String          na
         joiningDate                 string          should be of form yyyy-mm-dd
         gender                      string          accepted values MALE,FEMALE
