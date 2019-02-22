@@ -2,7 +2,6 @@ package com.hashedin.hu;
 
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 
@@ -14,12 +13,12 @@ public class CompOffTest {
     @Test
     public void testCompOffNotAddedIfLogWorkLessThan8hrs(){
         e1.addCompoff(LocalDateTime.of(2019, Month.FEBRUARY,1,10,10),LocalDateTime.of(2019,Month.FEBRUARY,1,11,1,1));
-        assertEquals(0,e1.compOff.getAvailableLeaves());
+        assertEquals(0,e1.getCompOff().getAvailableLeaves());
     }
     @Test
     public void testCompoffShouldNotBeAddedForWeekDays(){
         e1.addCompoff(LocalDateTime.of(2019, Month.FEBRUARY,1,10,10),LocalDateTime.of(2019,Month.FEBRUARY,1,20,1,1));
-        assertEquals(0,e1.compOff.getAvailableLeaves());
+        assertEquals(0,e1.getCompOff().getAvailableLeaves());
     }
 
 }

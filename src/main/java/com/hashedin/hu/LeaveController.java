@@ -12,21 +12,38 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 public class LeaveController {
+    public LeaveService getLeaveService() {
+        return leaveService;
+    }
+
+    public void setLeaveService(LeaveService leaveService) {
+        this.leaveService = leaveService;
+    }
+
     @Autowired
-    LeaveService leaveService;
+    private LeaveService leaveService;
+
+    public EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     @RequestMapping(value = "/leave/apply",method = RequestMethod.POST)
     public ResponseEntity<Void> createEmployee(@RequestBody LeaveRequest request, UriComponentsBuilder ucBuilder){
         System.out.println("Applying leave ");
-        request.empoyee = employeeService.getEmployeeByID((long) request.getEmp_id());
+        request.empoyee = employeeService.getEmployeeByID((long) request.getEmpId());
         if(request.empoyee == null)
         {
-            return new ResponseEntity("Employee with id:" + request.getEmp_id()+ "not found",HttpStatus.NOT_FOUND);
+            return new ResponseEntity("Employee with id:" + request.getEmpId()+ "not found",HttpStatus.NOT_FOUND);
         }
         LeaveResponse response = leaveService.applyLeave(request);
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity(response.status, HttpStatus.CREATED);
+        return new ResponseEntity(response.getStatus(), HttpStatus.CREATED);
     }
 }

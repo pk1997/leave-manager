@@ -3,13 +3,17 @@ package com.hashedin.hu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class EmployeeService {
+
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
+    private LeaveAccrual leaveAccrual = new LeaveAccrual();
+    private CompOff compOff = new CompOff();
 
     public void addEmployee(Employee e)
     {
@@ -25,6 +29,30 @@ public class EmployeeService {
             return employeeRepository.findById(id).get();
         }
         return null;
+    }
+
+    public Employee updateUser(Employee currentEmployee) {
+        Employee currentEmployee1 = currentEmployee;
+        employeeRepository.save(currentEmployee1);
+        return currentEmployee1;
+    }
+
+    public int getNoOfLeavesAvailable(long id) {
+        Employee employee = getEmployeeByID(id);
+        leaveAccrual.addLeavesMonthly(employee, LocalDate.now());
+        int i = employee.getLeavesCarriedFromLastYear() + employee.getTotalNoOfLeaves() - employee.getNoOfLeavesTaken();
+        return i;
+    }
+
+
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
+    }
+
+    public void logHours(Employee employee, LogHours hours) {
+        employee.getCompOff().setWorkedOn(hours.from,hours.to);
+        employeeRepository.save(employee);
+        return;
     }
 }
 

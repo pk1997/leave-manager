@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.util.List;
 
 public class CsvReader {
-    public List<String[]>  CsvReader(String file)
+    public List<String[]>  csvReader(String file)
     {
         try {
             /*

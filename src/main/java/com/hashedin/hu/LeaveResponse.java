@@ -1,8 +1,8 @@
 package com.hashedin.hu;
 
 public class LeaveResponse {
-    LeaveStatus status;
-    String comment;
+    private LeaveStatus status;
+    private String comment;
 
     public LeaveResponse(LeaveStatus status, String comment) {
         this.status = status;
