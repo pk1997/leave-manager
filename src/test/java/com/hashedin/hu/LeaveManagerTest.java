@@ -73,7 +73,7 @@ public class LeaveManagerTest {
         LeaveRequest leave = new LeaveRequest(e,LocalDate.of(2019,3,1),LocalDate.of(2019,3,5),true);
         leave.setTypes(LeaveTypes.PATERNITY);
         LeaveResponse response = manager.applyLeave(leave);
-        assertEquals(response.getStatus(),LeaveStatus.APPROVED);
+        assertEquals(response.getStatus(),LeaveStatus.REJECTED);
     }
     @Test
     public void testValidateLeaveDuplicate() {

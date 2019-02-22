@@ -115,6 +115,7 @@ public class LeaveManager {
         {
             if(handleCompOff(leave))
             {
+                leave.empoyee.getCompOff().setAvailableLeaves(leave.empoyee.getCompOff().getAvailableLeaves()-1);
                 response.setStatus(LeaveStatus.APPROVED);
                 leave.empoyee.addLeave(leave.getStartDate(),leave.getEndDate());
                 saveToRepository(leave);
@@ -274,10 +275,10 @@ public class LeaveManager {
             if(!leave.isBlanketCoverage()) {
                 noOfDays = getWorkingDaysBetweenTwoDays(leave.getStartDate(),leave.getEndDate());
             }
-           /* if(checkForOptionalLeaves(leave))
+            if(checkForOptionalLeaves(leave))
             {
                 noOfDays -=1;
-            }*/
+            }
 
             else
             {
