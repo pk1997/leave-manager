@@ -6,7 +6,15 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ExecutorService {
-    LeaveAccrual accrual = new LeaveAccrual();
+    public LeaveAccrual getAccrual() {
+        return accrual;
+    }
+
+    public void setAccrual(LeaveAccrual accrual) {
+        this.accrual = accrual;
+    }
+
+    private LeaveAccrual accrual = new LeaveAccrual();
     public void scheduler(Employee empoyee)
     {
         ScheduledExecutorService execService

@@ -16,38 +16,29 @@ public class LeaveAccrualTest {
     @Test
     public void testAddOnlyOneLeaveIfEmployeeJoinedAfter15(){
         accrual.addLeavesMonthly(e1,LocalDate.of(2019,2,1));
-        assertEquals(1,e1.total_no_of_leaves);
+        assertEquals(1,e1.getTotalNoOfLeaves());
     }
     @Test
     public void testMaternityLeaveUpdating()
     {
         LeaveRequest request = new LeaveRequest(e2,LocalDate.of(2019,7,10),null,true);
         request.setMaternityLeave();
-        LeaveResponse response = manager.ApplyLeave(request);
+        LeaveResponse response = manager.applyLeave(request);
         accrual.addLeavesMonthly(e2,LocalDate.of(2019,10,1));
-        assertEquals(e2.total_no_of_leaves,14);
-    }
-    @Test
-    public void testMaternityLeaveUpdatingCheckAfterHoliday()
-    {
-        LeaveRequest request = new LeaveRequest(e1,LocalDate.of(2019,7,10),null,true);
-        request.setMaternityLeave();
-        LeaveResponse response = manager.ApplyLeave(request);
-        accrual.addLeavesMonthly(e1,LocalDate.of(2019,10,1));
-        assertEquals(18,e1.total_no_of_leaves);
+        assertEquals(e2.getTotalNoOfLeaves(),12);
     }
     @Test
     public void testForLeaveUpdating()
     {
         accrual.addLeavesMonthly(e2,LocalDate.of(2019,2,1));
-        assertEquals(2,e2.total_no_of_leaves);
+        assertEquals(2,e2.getTotalNoOfLeaves());
     }
     @Test
     public void testForSchedulerWorking()
     {
         ExecutorService service = new ExecutorService();
         accrual.addLeavesMonthly(e1,LocalDate.now());
-        assertEquals(1,e1.total_no_of_leaves);
+        assertEquals(1,e1.getTotalNoOfLeaves());
     }
 
 }

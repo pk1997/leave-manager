@@ -21,8 +21,9 @@ public class EmpController {
     public List<Employee> getEmployees(){
         return employeeService.getAllEmployeees();
     }
+
     @RequestMapping("/employee/{id}")
-    public ResponseEntity<Employee> getUserById(@PathVariable("id") int id){
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") int id){
         Employee employee = employeeService.getEmployeeByID((long) id);
         if(employee == null)
         {
@@ -30,6 +31,7 @@ public class EmpController {
         }
         return new ResponseEntity<Employee>(employee, HttpStatus.OK);
     }
+
     @RequestMapping(value = "/employees/",method = RequestMethod.POST)
     public ResponseEntity<Void> createEmployee(@RequestBody Employee employee, UriComponentsBuilder ucBuilder){
         System.out.println("Creating User "+employee.getName());
@@ -47,16 +49,16 @@ public class EmpController {
 
         currentEmployee.setName(employee.getName());
         currentEmployee.setGender(employee.getGender());
-        currentEmployee.setJoining_date(employee.getJoining_date());
-        currentEmployee.setNo_of_leaves_taken(employee.no_of_leaves_taken);
-        currentEmployee.setFromDate(employee.fromDate);
-        currentEmployee.setToDate(employee.toDate);
-        currentEmployee.setMaternity_leave_from(employee.maternity_leave_from);
-        currentEmployee.setMaternity_leave_till(employee.Maternity_leave_till);
-        currentEmployee.setLeavesLastResetOn(employee.leavesLastResetOn);
-        currentEmployee.setCompOff(employee.compOff);
-        currentEmployee.setOptionaLeaves(employee.optionaLeaves);
-        currentEmployee.setNo_of_maternity_leaves_taken(employee.no_of_maternity_leaves_taken);
+        currentEmployee.setJoiningDate(employee.getJoiningDate());
+        currentEmployee.setNoOfLeavesTaken(employee.getNoOfLeavesTaken());
+        currentEmployee.setLeaveTakenFrom(employee.getLeaveTakenFrom());
+        currentEmployee.setLeaveTakenTill(employee.getLeaveTakenTill());
+        currentEmployee.setMaternityLeaveFrom(employee.getMaternityLeaveFrom());
+        currentEmployee.setMaternityLeaveTill(employee.getMaternityLeaveTill());
+        currentEmployee.setLeavesLastResetOn(employee.getLeavesLastResetOn());
+        currentEmployee.setCompOff(employee.getCompOff());
+        currentEmployee.setOptionaLeaves(employee.getOptionaLeaves());
+        currentEmployee.setNoOfMaternityLeavesTaken(employee.getNoOfMaternityLeavesTaken());
 
         employeeService.updateUser(currentEmployee);
         return new ResponseEntity<Employee>(currentEmployee, HttpStatus.OK);

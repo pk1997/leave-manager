@@ -7,22 +7,23 @@ import java.time.LocalDate;
 public class LeaveRequest {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
-    LocalDate startDate;
-    LocalDate endDate;
-    boolean blanketCoverage;
-    LeaveTypes types;
+    private Long id;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private boolean blanketCoverage;
+    private LeaveTypes types;
     @ManyToOne
     @JoinColumn(name = "Employee")
     Employee empoyee;
-    int emp_id;
+    private int empId;
+    private LocalDate requestedDate;
 
-    public int getEmp_id() {
-        return emp_id;
+    public int getEmpId() {
+        return empId;
     }
 
-    public void setEmp_id(int emp_id) {
-        this.emp_id = emp_id;
+    public void setEmpId(int empId) {
+        this.empId = empId;
     }
 //store the date o
 
@@ -56,7 +57,7 @@ public class LeaveRequest {
     }
 
     //store the date on which leave was requested default is todays date
-    LocalDate requestedDate;
+
 
     {
         requestedDate = LocalDate.now();

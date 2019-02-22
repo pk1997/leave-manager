@@ -8,8 +8,16 @@ import java.util.List;
 
 @Service
 public class EmployeeService {
+    public EmployeeRepository getEmployeeRepository() {
+        return employeeRepository;
+    }
+
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+
     @Autowired
-    EmployeeRepository employeeRepository;
+    private EmployeeRepository employeeRepository;
 
     public void addEmployee(Employee e)
     {
