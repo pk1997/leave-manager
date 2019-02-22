@@ -9,7 +9,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-public class EmpController {
+public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
     @RequestMapping("/add2")
@@ -46,8 +46,6 @@ public class EmpController {
 
         if (currentEmployee == null) {return new ResponseEntity("Employee not found",HttpStatus.NOT_FOUND);
         }
-
-        currentEmployee.setName(employee.getName());
         currentEmployee.setGender(employee.getGender());
         currentEmployee.setJoiningDate(employee.getJoiningDate());
         currentEmployee.setNoOfLeavesTaken(employee.getNoOfLeavesTaken());
@@ -59,9 +57,27 @@ public class EmpController {
         currentEmployee.setCompOff(employee.getCompOff());
         currentEmployee.setOptionaLeaves(employee.getOptionaLeaves());
         currentEmployee.setNoOfMaternityLeavesTaken(employee.getNoOfMaternityLeavesTaken());
+        currentEmployee.setLeavesCarriedFromLastYear(employee.getLeavesCarriedFromLastYear());
 
         employeeService.updateUser(currentEmployee);
         return new ResponseEntity<Employee>(currentEmployee, HttpStatus.OK);
+    }
+    @RequestMapping(value = "employee/{id}/leavebalance/")
+    public ResponseEntity<?> getAvailableLeaves(@PathVariable("id") int id){
+        int noOfLeavesAvailable = employeeService.getNoOfLeavesAvailable(id);
+        return new ResponseEntity(noOfLeavesAvailable,HttpStatus.OK);
+
+    }
+    @RequestMapping(value = "employee/{id}" ,method = RequestMethod.DELETE)
+     public ResponseEntity deleteUser(@PathVariable("id") int id){
+        Employee employee = employeeService.getEmployeeByID((long) id);
+        if(employee == null)
+        {
+            return new ResponseEntity("unable to find user with id " + id ,HttpStatus.NOT_FOUND);
+        }
+        employeeService.deleteEmployee(employee);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+
     }
 }
 

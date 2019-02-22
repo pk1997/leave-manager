@@ -40,5 +40,16 @@ public class EmployeeService {
         employeeRepository.save(currentEmployee1);
         return currentEmployee1;
     }
+
+    public int getNoOfLeavesAvailable(long id) {
+        Employee employee = getEmployeeByID(id);
+        int i = employee.getLeavesCarriedFromLastYear() + employee.getTotalNoOfLeaves() - employee.getNoOfLeavesTaken();
+        return i;
+    }
+
+
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
+    }
 }
 
