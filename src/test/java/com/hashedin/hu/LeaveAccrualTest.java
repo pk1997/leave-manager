@@ -1,5 +1,7 @@
 package com.hashedin.hu;
 
+import com.hashedin.hu.models.Gender;
+import com.hashedin.hu.models.LeaveResponse;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -7,7 +9,7 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class LeaveAccrualTest {
-    Employee e1 = new Employee("e1", (long) 1,0,Gender.FEMALE, "2019-01-16");
+    Employee e1 = new Employee("e1", (long) 1,0, Gender.FEMALE, "2019-01-16");
     Employee e2 = new Employee("e1", (long) 1,0,Gender.FEMALE, "2019-01-10");
 
     LeaveAccrual accrual = new LeaveAccrual();

@@ -1,4 +1,4 @@
-package com.hashedin.hu;
+package com.hashedin.hu.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
